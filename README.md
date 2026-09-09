@@ -47,7 +47,9 @@ GF_SECURITY_ADMIN_PASSWORD=Your_passwd
 
 #### Mqtt-Server ###
 MQTT_SERVER=tcp://<ip-domainneme>:1883
+
 MQTT_USER=mqtt_user
+
 MQTT_PASSWORD=mqtt_passwd
 
 #### Topic-Mqtt ####
