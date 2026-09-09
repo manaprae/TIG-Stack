@@ -13,14 +13,6 @@ services:
       - TZ=Asia/Bangkok
       - INFLUXD_LOG_LEVEL=info
       - TMPDIR=/var/lib/influxdb2
-      #### Incase using restore from Backup -> IMPORTANT: using Admin's token from old server uncomment below ####
-      #- DOCKER_INFLUXDB_INIT_MODE=setup
-      #- DOCKER_INFLUXDB_INIT_USERNAME=admin
-      #- DOCKER_INFLUXDB_INIT_PASSWORD=%139User1339  #password admin from old server
-      #- DOCKER_INFLUXDB_INIT_ORG=EQS05
-      #- DOCKER_INFLUXDB_INIT_BUCKET=PJW
-      #- DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=UjhbuUYlw2nf5DMMOxj30oLETDdtrApDjhedmgpjrDzoPjCx33I4Wl55OTtttA0I8qFQFEVlA255ArP9dNQh5g==   #admin's first token
-      #- DOCKER_INFLUXDB_INIT_RETENTION=0
     command: influxd
  
   telegraf:
@@ -29,36 +21,32 @@ services:
     restart: always
     depends_on:
       - influxdb
-    # Telegraf รู้จักตัวแปรในไฟล์ .env
     env_file:
-      - .env
+      - ./env_file/.env
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
     environment:
       - TZ=Asia/Bangkok
-    # ไม่ต้องใส่ command: export ... แล้ว เพราะเราใช้ไฟล์ config โดยตรง
 
-  # grafana:
-  #   image: grafana/grafana:latest
-  #   container_name: grafana
-  #   user: root
-  #   restart: always
-  #   depends_on:
-  #     - influxdb
-  #   environment:
-  #     - TZ=Asia/Bangkok
-  #     - GF_SECURITY_ADMIN_USER=admin
-  #     - GF_SECURITY_ADMIN_PASSWORD=%139User1339  #change the password
-  #   links:
-  #     - influxdb
-  #   ports:
-  #     - 3000:3000
-  #   volumes:
-  #     - ./grafana_data:/var/lib/grafana
-  #     - ./plugins:/var/lib/grafana/plugins      
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    user: root
+    restart: always
+    depends_on:
+      - influxdb
+    env_file:
+      - ./env_file/.env
+    environment:
+      - TZ=Asia/Bangkok
+      - GF_SECURITY_ADMIN_USER=$GF_SECURITY_ADMIN_USER
+      - GF_SECURITY_ADMIN_PASSWORD=$GF_SECURITY_ADMIN_PASSWORD  #change the password
+    links:
+      - influxdb
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+      - ./plugins:/var/lib/grafana/plugins      
   
 
-# chown -R 472:472 grafana_data/
-# chmod 775 grafana_data/
-# chmod 775 influxdb_data
-# chmod 775 plugins/
