@@ -24,15 +24,18 @@ to a blank string.
  ✔ Network tig-stack_default Created                                    0.1s
  ✔ Container influxdb        Started                                   17.7s
 ```
+
 ไม่เป็นไรจะเห็นมี warning ในส่วนของ User +password ของ grafana
 Login เข้าใช่งาน Influxdb ผ่าน http://<ip-adress>:8086/
 แล้วใส่  user + passwd, Organization Name, Bucket Name  แล้วกด Continue
 จะได้ token มา เอามาใส่ที่ .env
+
 ```
 cd env_file
 cp env.example .env
 vim .env
 ```
+
 เอามาใส่ ในส่วนต่างในไฟล์ .env นี้
 ####  Influxdb ####
 INFLUX_CONTAINER_NAME=Influxdb
@@ -47,9 +50,7 @@ GF_SECURITY_ADMIN_PASSWORD=Your_passwd
 
 #### Mqtt-Server ###
 MQTT_SERVER=tcp://<ip-domainneme>:1883
-
 MQTT_USER=mqtt_user
-
 MQTT_PASSWORD=mqtt_passwd
 
 #### Topic-Mqtt ####
@@ -57,10 +58,12 @@ MQTT_TOPICS_1=Topic
 ##MQTT_TOPICS_2=
 ##MQTT_TOPICS_3=
 เมื่อใส่ครบแล้ว
+
 ```
 docker compose up telegraf -d
 docker compose up grafana -d
 ```
+
 Login เข้าใช่งาน Grafana ผ่าน http://<ip-adress>:3000/
 แล้วใส่  user + passwd
 ตามที่ set ใว้ใน file .env
