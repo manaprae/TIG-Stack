@@ -38,26 +38,28 @@ vim .env
 
 เอามาใส่ ในส่วนต่างในไฟล์ .env นี้
 ##### ### Influxdb # ### 
-INFLUX_CONTAINER_NAME=Influxdb
-INFLUX_HOST="http://ip-server:8086"
-INFLUX_TOKEN=Your_token 
-INFLUX_ORG=Your_Org 
-INFLUX_BUCKET=Your_Bucket
+INFLUX_CONTAINER_NAME=Influxdb  
+INFLUX_HOST="http://ip-server:8086"  
+INFLUX_TOKEN=Your_token  
+INFLUX_ORG=Your_Org  
+INFLUX_BUCKET=Your_Bucket  
+
 
 แล้วใส่ข้อมูลลง ในไฟล์ .env ในส่วนอื่นๆ ให้ครบ
 ##### ### Grafana ####
-GF_SECURITY_ADMIN_USER=admin 
-GF_SECURITY_ADMIN_PASSWORD=Your_passwd 
+GF_SECURITY_ADMIN_USER=admin   
+GF_SECURITY_ADMIN_PASSWORD=Your_passwd   
 
 ##### ### Mqtt-Server ###
-MQTT_SERVER=tcp://<ip-domainneme>:1883 
-MQTT_USER=mqtt_user 
-MQTT_PASSWORD=mqtt_passwd 
+MQTT_SERVER=tcp://<ip-domainneme>:1883   
+MQTT_USER=mqtt_user   
+MQTT_PASSWORD=mqtt_passwd   
 
 ##### ### Topic-Mqtt ###
-MQTT_TOPICS_1=Topic 
-##MQTT_TOPICS_2= 
-##MQTT_TOPICS_3= 
+MQTT_TOPICS_1=Topic   
+##MQTT_TOPICS_2=   
+##MQTT_TOPICS_3=  
+
 เมื่อใส่ครบแล้ว
 
 ```
